@@ -4,12 +4,12 @@ import SiteFooter from "./site-footer";
 import SiteHeader from "./site-header";
 import "./globals.css";
 import "./sections.css";
-const manrope = localFont({ src: [{ path: "./fonts/manrope-regular.ttf", weight: "400" }, { path: "./fonts/manrope-semibold.ttf", weight: "600" }], variable: "--font-manrope", display: "swap" });
+const golos = localFont({ src: [{ path: "./fonts/golos-400.ttf", weight: "400" }, { path: "./fonts/golos-600.ttf", weight: "600" }, { path: "./fonts/golos-700.ttf", weight: "700" }], variable: "--font-golos", display: "swap" });
 export const metadata: Metadata = {
-  title: "Sigma — натяжные стены с текстильной фактурой",
-  description: "Ровные стены с текстильной фактурой — без долгого ремонта. Натяжные стены Sigma: декоративная ткань на каркасе, выбор цветов и фактур.",
+  title: "Натяжные Сигма-стены — тихо, быстро, красиво",
+  description: "Стены с текстильной фактурой: ровнее, быстрее, выгоднее. Натяжные Сигма-стены — идеальная геометрия и поверхность стен, в 10 раз быстрее традиционных технологий.",
   icons: { icon: "/images/Vector.svg" },
 };
 export default function RootLayout({ children }: { children: React.ReactNode }) {
-  return <html lang="ru" className={manrope.variable}><body><SiteHeader />{children}<SiteFooter /></body></html>;
+  return <html lang="ru" className={golos.variable}><body><SiteHeader />{children}<SiteFooter /></body></html>;
 }

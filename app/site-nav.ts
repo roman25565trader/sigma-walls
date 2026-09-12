@@ -1,25 +1,23 @@
-export const PHONE_DISPLAY = "+7 986 723 18 84";
-export const PHONE_TEL = "tel:+79867231884";
+export { PHONE_DISPLAY, PHONE_TEL } from "./contacts";
 
 export const siteNav = [
   { href: "#home", label: "Главная" },
   { href: "#technology", label: "Технология" },
+  { href: "#benefits", label: "Почему Сигма" },
   { href: "#scenarios", label: "Для кого" },
   { href: "#material", label: "Материалы" },
-  { href: "#benefits", label: "Преимущества" },
   { href: "#everyday", label: "В жизни" },
-  { href: "#catalog", label: "Каталог" },
-  { href: "#install", label: "Установка" },
-  { href: "#projects", label: "Квартиры" },
+  { href: "#install", label: "Монтаж" },
+  { href: "#compare", label: "Сравнение" },
   { href: "#faq", label: "Вопросы" },
   { href: "#contact", label: "Заявка" },
 ] as const;
 
 export const headerNav = [
   { href: "#technology", label: "Технология" },
+  { href: "#benefits", label: "Почему Сигма" },
   { href: "#material", label: "Материалы" },
-  { href: "#install", label: "Установка" },
-  { href: "#projects", label: "Квартиры" },
+  { href: "#compare", label: "Сравнение" },
   { href: "#faq", label: "Вопросы" },
 ] as const;
 

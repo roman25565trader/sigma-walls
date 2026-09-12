@@ -3,6 +3,7 @@
 import Image from "next/image";
 import { useRef } from "react";
 import LandingSections from "./landing-sections";
+import { PHONE_DISPLAY, PHONE_TEL } from "./contacts";
 
 function Arrow({ diagonal = false }: { diagonal?: boolean }) {
   return <svg width="22" height="22" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d={diagonal ? "M6 18 18 6M6 6h12v12" : "M4 12h15m-6-6 6 6-6 6"} stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" /></svg>;
@@ -14,10 +15,10 @@ export default function Home() {
     <>
       <main>
         <section className="hero" id="home" aria-labelledby="hero-title">
-          <div className="room"><Image src="/images/living-room-v2.webp" alt="Белая дизайнерская гостиная с натяжными текстильными стенами и подсветкой по периметру" fill sizes="100vw" preload /></div>
+          <div className="room"><Image src="/images/real/hero.webp" alt="Светлая гостиная с натяжными Сигма-стенами и подсветкой по периметру" fill sizes="100vw" priority /></div>
           <div className="hero-content wrap">
-            <h1 id="hero-title"><span className="headline-line">Ровные стены</span><span className="headline-line">с <strong>текстильной фактурой</strong></span><span className="headline-line">— без долгого ремонта</span></h1>
-            <p className="intro"><strong>Натяжные стены Sigma</strong> — отделка на каркасе с декоративной тканью. Закрывают неровности основания и помогают создать новый интерьер <strong>без длительного выравнивания</strong> стен под покраску.</p>
+            <h1 id="hero-title"><span className="headline-line">Стены с текстильной фактурой:</span><span className="headline-line"><strong>ровнее, быстрее, выгоднее</strong></span></h1>
+            <p className="intro"><strong>Натяжные Сигма-стены</strong> — идеальная геометрия и поверхность стен, <strong>в 10 раз быстрее</strong> традиционных технологий, стоимость сопоставима с традиционными технологиями.</p>
             <button className="primary hero-cta" onClick={openCalculator}>Рассчитать стоимость моих стен</button>
           </div>
           <button className="video-orbit" aria-label="Посмотреть, как это устроено — открыть видео" onClick={() => videoDialog.current?.showModal()}>
@@ -27,12 +28,15 @@ export default function Home() {
         </section>
         <LandingSections />
       </main>
-      <dialog className="video-dialog" ref={videoDialog} aria-labelledby="video-title" onClick={e => { if(e.target === e.currentTarget) videoDialog.current?.close(); }}>
+      <dialog className="video-dialog video-dialog--vertical" ref={videoDialog} aria-labelledby="video-title" onClick={e => { if(e.target === e.currentTarget) videoDialog.current?.close(); }}>
         <button className="close" aria-label="Закрыть видео" onClick={() => videoDialog.current?.close()}>×</button>
-        <h2 id="video-title">Как устроены стены Sigma</h2>
-        <div className="video-placeholder"><span>▷</span><p>Видео скоро появится</p></div>
-        <p>Каркас задаёт плоскость стены, а декоративная ткань создаёт ровную поверхность. При обновлении интерьера ткань можно заменить.</p>
-        <a className="header-cta" href="#technology" onClick={() => videoDialog.current?.close()}>Подробнее о технологии <Arrow /></a>
+        <h2 id="video-title">Как устроены Натяжные Сигма-стены</h2>
+        <div className="video-placeholder video-placeholder--vertical"><span>▷</span><p>Короткий вертикальный ролик скоро появится</p></div>
+        <p>Существующая стена остаётся внутри конструкции, акустическая мембрана поглощает шум, а декоративная ткань создаёт идеально ровную поверхность.</p>
+        <div className="video-dialog-actions">
+          <a className="header-cta" href="#technology" onClick={() => videoDialog.current?.close()}>Подробнее о технологии <Arrow /></a>
+          <a className="text-link" href={PHONE_TEL}>{PHONE_DISPLAY}</a>
+        </div>
       </dialog>
     </>
   );

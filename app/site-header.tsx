@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import Image from "next/image";
 import { usePathname } from "next/navigation";
 import { MessengerIcons } from "./messengers";
 import { headerNav, PHONE_DISPLAY, PHONE_TEL, siteNav } from "./site-nav";
@@ -37,21 +38,17 @@ export default function SiteHeader() {
     return () => window.removeEventListener("keydown", onKey);
   }, [open]);
 
-  useEffect(() => {
-    setOpen(false);
-  }, [pathname]);
-
   return (
     <header className={`site-header${scrolled || open ? " is-scrolled" : ""}${open ? " is-open" : ""}`}>
       <div className="header wrap">
-        <a href={to("#home")} className="brand" aria-label="Sigma — главная" onClick={() => setOpen(false)}>
-          <img src="/images/Vector.svg" alt="" className="brand-logo" width="155" height="80"/>
+        <a href={to("#home")} className="brand" aria-label="Натяжные Сигма-стены — главная" onClick={() => setOpen(false)}>
+          <Image src="/images/Vector.svg" alt="" className="brand-logo" width={155} height={80} priority />
         </a>
         <nav className="header-nav" aria-label="Основная навигация">
           {headerNav.map(item => <a key={item.href} href={to(item.href)}>{item.label}</a>)}
         </nav>
         <MessengerIcons />
-        <a className="phone" href={PHONE_TEL}>
+        <a className="phone header-phone-compact" href={PHONE_TEL} aria-label="Позвонить">
           <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="m5 3 4 1 1 5-3 1c1 3 4 6 7 7l1-3 5 1 1 4c-8 7-24-9-16-16Z" stroke="currentColor" strokeWidth="1.5"/></svg>
           {PHONE_DISPLAY}
         </a>
@@ -76,6 +73,7 @@ export default function SiteHeader() {
               <a key={item.href} href={to(item.href)} onClick={() => setOpen(false)}>{item.label}</a>
             ))}
           </nav>
+          <MessengerIcons />
           <a className="phone" href={PHONE_TEL} onClick={() => setOpen(false)}>
             <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="m5 3 4 1 1 5-3 1c1 3 4 6 7 7l1-3 5 1 1 4c-8 7-24-9-16-16Z" stroke="currentColor" strokeWidth="1.5"/></svg>
             {PHONE_DISPLAY}
