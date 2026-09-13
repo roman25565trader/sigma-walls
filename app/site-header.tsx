@@ -42,7 +42,7 @@ export default function SiteHeader() {
     <header className={`site-header${scrolled || open ? " is-scrolled" : ""}${open ? " is-open" : ""}`}>
       <div className="header wrap">
         <a href={to("#home")} className="brand" aria-label="Натяжные Сигма-стены — главная" onClick={() => setOpen(false)}>
-          <Image src="/images/Vector.svg" alt="" className="brand-logo" width={155} height={80} priority />
+          <Image src="/images/Vector.svg" alt="" className="brand-logo" width={155} height={80} style={{ width: "auto" }} priority />
         </a>
         <nav className="header-nav" aria-label="Основная навигация">
           {headerNav.map(item => <a key={item.href} href={to(item.href)}>{item.label}</a>)}

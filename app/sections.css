@@ -666,3 +666,20 @@ body.nav-open{overflow:hidden}
 .gallery-glaze-material dt{color:#888e93}
 .gallery-glaze-material dd{color:#3c4044}
 }
+
+.gallery-fabrics dd .fabric-chips{display:flex;flex-wrap:wrap;gap:6px;margin-top:2px;max-width:320px}
+.gallery-fabrics dd .fabric-chips li:before{content:none}
+.fabric-chip{display:inline-flex;align-items:center;gap:7px;padding:3px 10px 3px 3px;border:1px solid #ffffff55;border-radius:999px;background:#ffffff1f;color:inherit;font-size:11px;line-height:1.2;white-space:nowrap;transform:none}
+.fabric-chip img{width:22px;height:22px;border-radius:50%;object-fit:cover}
+.fabric-chip:hover{transform:none;border-color:#ffffffaa}
+.fabric-chip.is-active{background:#ff1d33;border-color:#ff1d33;color:#ffffff}
+.fabric-chip.is-static{padding-left:10px;opacity:.75}
+.gallery-material-link img{width:140px;height:182px;object-fit:cover}
+@media(max-width:1200px){
+.fabric-chip{border-color:#d8dbdd;background:#ffffff;color:#3c4044}
+.fabric-chip:hover{border-color:#101215}
+.fabric-chip.is-active{background:#ff1d33;border-color:#ff1d33;color:#ffffff}
+.gallery-fabrics dd .fabric-chips{max-width:none}
+}
+.gallery-glaze-material dl{gap:10px;justify-content:flex-start}
+.gallery-material-link img{height:auto;aspect-ratio:140/182}

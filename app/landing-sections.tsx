@@ -144,10 +144,17 @@ function CompareTable() {
 export default function LandingSections() {
   const installVideo = useRef<HTMLDialogElement>(null);
   const [room, setRoom] = useState(0);
+  const [fabric, setFabric] = useState(0);
   const [layer, setLayer] = useState(0);
   const [copyLayer, setCopyLayer] = useState(0);
   const [copyVisible, setCopyVisible] = useState(true);
   const selected = rooms[room];
+  const photoFabrics = selected.fabrics.filter(item => item.image);
+  const selectedFabric = photoFabrics[Math.min(fabric, photoFabrics.length - 1)];
+  function chooseRoom(next: number) {
+    setRoom(next);
+    setFabric(0);
+  }
   const selectedLayer = wallLayers[copyLayer];
   const swapTimer = useRef<number | null>(null);
   function selectLayer(next: number) {
@@ -164,7 +171,7 @@ export default function LandingSections() {
     const next = event.key === "ArrowRight" || event.key === "ArrowDown" ? (index + 1) % rooms.length : event.key === "ArrowLeft" || event.key === "ArrowUp" ? (index + rooms.length - 1) % rooms.length : event.key === "Home" ? 0 : event.key === "End" ? rooms.length - 1 : null;
     if (next === null) return;
     event.preventDefault();
-    setRoom(next);
+    chooseRoom(next);
     document.getElementById(`room-tab-${next}`)?.focus();
   }
   useEffect(() => () => {
@@ -229,19 +236,28 @@ export default function LandingSections() {
             </div>
             <div className="gallery-glaze-material">
               <a className="gallery-material-link" href={PHONE_TEL} aria-label="Обсудить похожий вариант">
-                <Image src={selected.material} alt={`Фактура ткани для варианта «${selected.tab}»`} width={140} height={180}/>
+                <Image key={selectedFabric.image} src={selectedFabric.image!} alt={`Ткань ${selectedFabric.name} крупным планом`} width={140} height={182} style={{ width: 140, height: "auto" }}/>
                 <span className="gallery-material-arrow" aria-hidden="true">↗</span>
               </a>
               <dl>
                 <div><dt>Оттенок</dt><dd>{selected.tone}</dd></div>
-                <div className="gallery-fabrics"><dt>Ткань</dt><dd><ul>{selected.fabrics.map(fabric => <li key={fabric}>{fabric}</li>)}</ul></dd></div>
+                <div className="gallery-fabrics"><dt>Ткань</dt><dd>
+                  <ul className="fabric-chips" aria-label="Артикулы ткани">
+                    {selected.fabrics.map(item => {
+                      const index = photoFabrics.indexOf(item);
+                      if (index === -1) return <li key={item.name}><span className="fabric-chip is-static">{item.name}</span></li>;
+                      const active = item === selectedFabric;
+                      return <li key={item.name}><button type="button" className={`fabric-chip${active ? " is-active" : ""}`} aria-pressed={active} onClick={() => setFabric(index)}><Image src={item.thumb!} alt="" width={24} height={24}/>{item.name}</button></li>;
+                    })}
+                  </ul>
+                </dd></div>
               </dl>
             </div>
           </div>
         </div>
         <div className="gallery-previews" role="tablist" aria-label="Тип интерьера">
           {rooms.map((item, i) => (
-            <button key={item.tab} type="button" role="tab" id={`room-tab-${i}`} aria-controls="room-panel" aria-selected={room === i} tabIndex={room === i ? 0 : -1} className="gallery-preview" onClick={() => setRoom(i)} onKeyDown={event => onRoomTabKeyDown(event, i)}>
+            <button key={item.tab} type="button" role="tab" id={`room-tab-${i}`} aria-controls="room-panel" aria-selected={room === i} tabIndex={room === i ? 0 : -1} className="gallery-preview" onClick={() => chooseRoom(i)} onKeyDown={event => onRoomTabKeyDown(event, i)}>
               <span className="gallery-preview-thumb"><Image src={item.image} alt="" fill sizes="120px"/></span>
               <span className="gallery-preview-copy">
                 <strong>{item.tab}</strong>

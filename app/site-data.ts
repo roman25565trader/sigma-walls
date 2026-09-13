@@ -45,7 +45,9 @@ export const scenarios = [
   { image: "/images/real/case-light.webp", title: "Планируете дизайнерские световые решения", text: "Сможете красиво оформить переход света с потолка на стену", alt: "Гостиная со световыми линиями, переходящими с потолка на стену" },
 ] as const;
 
-export const rooms = [
+export type Fabric = { name: string; image?: string; thumb?: string };
+
+export const rooms: { tab: string; tabNote: string; title: string; desc: string; tone: string; image: string; fabrics: Fabric[] }[] = [
   {
     tab: "Детская",
     tabNote: "Целый маленький мир на одной стене",
@@ -53,8 +55,10 @@ export const rooms = [
     desc: "Печать на ткани задаёт настроение комнаты и сохраняет тактильную фактуру ткани.",
     tone: "Пастельные тона",
     image: "/images/real/room-child.webp",
-    material: "/images/real/fabric-aspen-015.webp",
-    fabrics: ["аспен 015-300", "брюгге 012-300 НС"],
+    fabrics: [
+      { name: "аспен 015-300", image: "/images/fabrics/aspen-015.webp", thumb: "/images/fabrics/aspen-015-thumb.webp" },
+      { name: "брюгге 012-300 НС", image: "/images/fabrics/bruges-012.webp", thumb: "/images/fabrics/bruges-012-thumb.webp" },
+    ],
   },
   {
     tab: "Спальня",
@@ -63,8 +67,13 @@ export const rooms = [
     desc: "Мягкие оттенки вдохновляют и помогают расслабиться.",
     tone: "Светло-серый, бежевый",
     image: "/images/real/room-bedroom.webp",
-    material: "/images/real/swatch-bedroom.webp",
-    fabrics: ["акустик 329-320 НС", "акустик 541-320 НС", "антверпен 003-300 НС", "бруклин 007-300 НС", "каррара 006-300 НС"],
+    fabrics: [
+      { name: "акустик 329-320 НС", image: "/images/fabrics/acoustic-329.webp", thumb: "/images/fabrics/acoustic-329-thumb.webp" },
+      { name: "акустик 541-320 НС", image: "/images/fabrics/acoustic-541.webp", thumb: "/images/fabrics/acoustic-541-thumb.webp" },
+      { name: "антверпен 003-300 НС", image: "/images/fabrics/antwerp-003.webp", thumb: "/images/fabrics/antwerp-003-thumb.webp" },
+      { name: "бруклин 007-300 НС", image: "/images/fabrics/brooklyn-007.webp", thumb: "/images/fabrics/brooklyn-007-thumb.webp" },
+      { name: "каррара 006-300 НС", image: "/images/fabrics/carrara-006.webp", thumb: "/images/fabrics/carrara-006-thumb.webp" },
+    ],
   },
   {
     tab: "Гостиная",
@@ -73,8 +82,13 @@ export const rooms = [
     desc: "Светлая поверхность становится спокойным фоном для мебели и деталей интерьера.",
     tone: "Молочный, бежевый, капучино",
     image: "/images/real/room-living.webp",
-    material: "/images/real/swatch-living.webp",
-    fabrics: ["аспен 011-300 НС", "бостон 001-280 НС", "бостон 006-280 НС", "бостон 019-280 НС", "саванна 0114-300 НС"],
+    fabrics: [
+      { name: "аспен 011-300 НС", image: "/images/fabrics/aspen-011.webp", thumb: "/images/fabrics/aspen-011-thumb.webp" },
+      { name: "бостон 001-280 НС", image: "/images/fabrics/boston-001.webp", thumb: "/images/fabrics/boston-001-thumb.webp" },
+      { name: "бостон 006-280 НС", image: "/images/fabrics/boston-006.webp", thumb: "/images/fabrics/boston-006-thumb.webp" },
+      { name: "бостон 019-280 НС", image: "/images/fabrics/boston-019.webp", thumb: "/images/fabrics/boston-019-thumb.webp" },
+      { name: "саванна 0114-300 НС", image: "/images/fabrics/savanna-0114.webp", thumb: "/images/fabrics/savanna-0114-thumb.webp" },
+    ],
   },
   {
     tab: "Кабинет",
@@ -83,10 +97,14 @@ export const rooms = [
     desc: "Натуральная фактура собирает рабочую зону и делает интерьер визуально интереснее.",
     tone: "Тёмные тона",
     image: "/images/real/room-office.webp",
-    material: "/images/real/swatch-office.webp",
-    fabrics: ["акустик 331-320 НС", "антверпен 005", "антверпен 300", "бостон 014"],
+    fabrics: [
+      { name: "акустик 331-320 НС", image: "/images/fabrics/acoustic-331.webp", thumb: "/images/fabrics/acoustic-331-thumb.webp" },
+      { name: "антверпен 005", image: "/images/fabrics/antwerp-005.webp", thumb: "/images/fabrics/antwerp-005-thumb.webp" },
+      { name: "антверпен 300" },
+      { name: "бостон 014", image: "/images/fabrics/boston-014.webp", thumb: "/images/fabrics/boston-014-thumb.webp" },
+    ],
   },
-] as const;
+];
 
 export const everyday: Answer[] = [
   {
@@ -102,7 +120,7 @@ export const everyday: Answer[] = [
   {
     q: "Как убрать пятно?",
     a: "Провести влажную уборку мягкой тканью с мыльным раствором.",
-    image: "/images/real/clean-wall.webp",
+    image: "/images/real/stain-before-after.webp",
   },
   {
     q: "Как установить розетки и выключатели?",
@@ -126,7 +144,7 @@ export const everyday: Answer[] = [
       "На место пореза повесить какой-либо декоративный элемент, предмет интерьера, тем самым замаскировать данное место.",
       "По обе стороны от пореза на выбранном вами расстоянии установить разделительный профиль, вырезать лишний материал и сделать вставку такого же или другого по цвету или фактуре материала, тем самым разнообразить интерьер и сделать акцентную зону на стене.",
     ],
-    image: "/images/real/repair.webp",
+    image: "/images/real/repair-insert.webp",
   },
   {
     q: "Как осуществляется монтаж примыкания к двери и окну?",

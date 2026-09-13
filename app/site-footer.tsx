@@ -8,7 +8,7 @@ export default function SiteFooter() {
     <footer className="site-footer">
       <div className="wrap footer-grid">
         <Link href="/#home" className="footer-brand">
-          <Image src="/images/Vector.svg" alt="Натяжные Сигма-стены" width={170} height={88} />
+          <Image src="/images/Vector.svg" alt="Натяжные Сигма-стены" width={170} height={88} style={{ height: "auto" }} />
           <small>Натяжные стены для вашего дома и офиса</small>
         </Link>
         <div className="footer-col">
