@@ -15,10 +15,10 @@ export default function Home() {
     <>
       <main>
         <section className="hero" id="home" aria-labelledby="hero-title">
-          <div className="room"><Image src="/images/real/hero.webp" alt="Светлая гостиная с натяжными Сигма-стенами и подсветкой по периметру" fill sizes="100vw" priority /></div>
+          <div className="room"><Image src="/images/living-room-v2.webp" alt="Белая дизайнерская гостиная с натяжными текстильными стенами и подсветкой по периметру" fill sizes="100vw" priority /></div>
           <div className="hero-content wrap">
             <h1 id="hero-title"><span className="headline-line">Стены с текстильной фактурой:</span><span className="headline-line"><strong>ровнее, быстрее, выгоднее</strong></span></h1>
-            <p className="intro"><strong>Натяжные Сигма-стены</strong> — идеальная геометрия и поверхность стен, <strong>в 10 раз быстрее</strong> традиционных технологий, стоимость сопоставима с традиционными технологиями.</p>
+            <p className="intro"><strong>Натяжные <span className="nowrap">Сигма-стены</span></strong> — идеальная геометрия и поверхность стен, <strong>в 10 раз быстрее</strong> традиционных технологий, стоимость сопоставима с традиционными технологиями.</p>
             <button className="primary hero-cta" onClick={openCalculator}>Рассчитать стоимость моих стен</button>
           </div>
           <button className="video-orbit" aria-label="Посмотреть, как это устроено — открыть видео" onClick={() => videoDialog.current?.showModal()}>
@@ -30,7 +30,7 @@ export default function Home() {
       </main>
       <dialog className="video-dialog video-dialog--vertical" ref={videoDialog} aria-labelledby="video-title" onClick={e => { if(e.target === e.currentTarget) videoDialog.current?.close(); }}>
         <button className="close" aria-label="Закрыть видео" onClick={() => videoDialog.current?.close()}>×</button>
-        <h2 id="video-title">Как устроены Натяжные Сигма-стены</h2>
+        <h2 id="video-title">Как устроены Натяжные <span className="nowrap">Сигма-стены</span></h2>
         <div className="video-placeholder video-placeholder--vertical"><span>▷</span><p>Короткий вертикальный ролик скоро появится</p></div>
         <p>Существующая стена остаётся внутри конструкции, акустическая мембрана поглощает шум, а декоративная ткань создаёт идеально ровную поверхность.</p>
         <div className="video-dialog-actions">

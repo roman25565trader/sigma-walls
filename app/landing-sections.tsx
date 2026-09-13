@@ -37,7 +37,7 @@ function LeadForm() {
     return (
       <div className="lead-form">
         <a className="primary section-cta lead-form-button" href={PHONE_TEL}>{PHONE_DISPLAY} <NextArrow /></a>
-        <small>Заявка принята. Если удобнее голосом — позвоните, обсудим расчёт.</small>
+        <small>Автоматическая отправка заявок пока не подключена. Позвоните — обсудим расчёт.</small>
       </div>
     );
   }
@@ -180,7 +180,7 @@ export default function LandingSections() {
   return <div className="landing-sections">
     <section className="section wrap technology-section" id="technology">
       <div className="technology-heading">
-        <h2>Что такое <strong>Натяжные Сигма-стены?</strong></h2>
+        <h2>Что такое <strong>Натяжные <span className="nowrap">Сигма-стены?</span></strong></h2>
         <p>Три шага от существующего основания до идеально ровной стены.</p>
       </div>
       <div className="layer-tabs" role="tablist" aria-label="Слои натяжной стены">
@@ -200,7 +200,7 @@ export default function LandingSections() {
     </section>
 
     <section className="section value-section" id="benefits"><div className="wrap">
-      <h2>Почему Сигма-стены — <strong>это новая реальность в ремонте?</strong></h2>
+      <h2>Почему <span className="nowrap">Сигма-стены</span> — <strong>это новая реальность в ремонте?</strong></h2>
       <div className="value-grid">{values.map(item => (
         <article key={item.title}>
           <span className="value-icon"><Image src={item.image} alt="" width={240} height={240} /></span>
@@ -210,7 +210,7 @@ export default function LandingSections() {
     </div></section>
 
     <section className="section scenarios-section" id="scenarios"><div className="wrap">
-      <h2>Натяжные Сигма-стены — <strong>это лучшее решение для вас.</strong></h2>
+      <h2>Натяжные <span className="nowrap">Сигма-стены</span> — <strong>это лучшее решение для вас.</strong></h2>
       <div className="scenario-grid">{scenarios.map((item, i) => (
         <article className="scenario" key={item.title}>
           <div className="scenario-image"><Image src={item.image} alt={item.alt} fill sizes="(max-width:700px) 100vw, (max-width:1200px) 50vw, 25vw"/><span>0{i + 1}</span></div>
@@ -223,7 +223,7 @@ export default function LandingSections() {
     <section className="section wrap gallery-section" id="material">
       <div className="section-heading-row">
         <h2>Выберите, как будут<br /><strong>выглядеть ваши стены.</strong></h2>
-        <p>Детская, спальня, гостиная или кабинет — для каждой комнаты своя палитра оттенков и фактур. Листайте интерьеры и выбирайте настроение: цвет и ткань подберём по реальным образцам.</p>
+        <p>Детская, спальня, гостиная или кабинет — ткань может остаться тихим фоном или стать главным акцентом комнаты. Листайте интерьеры и выбирайте настроение: цвет и фактуру подберём по реальным образцам.</p>
       </div>
       <div className="gallery-stage">
         <div id="room-panel" role="tabpanel" aria-labelledby={`room-tab-${room}`} className="gallery-photo">
@@ -274,7 +274,7 @@ export default function LandingSections() {
       <div className="wrap">
         <div className="everyday-heading">
           <h2>Красиво на фото.<br /><strong>А как это в жизни?</strong></h2>
-          <p>Нажатие, пятно, розетка, телевизор, подсветка — то, что обычно выясняют уже на объекте.</p>
+          <p>Нажатие, пятно, розетка, телевизор — то, что обычно выясняют уже на объекте.</p>
         </div>
         <EverydayStories />
       </div>
@@ -287,9 +287,9 @@ export default function LandingSections() {
       </div>
       <div className="wrap">
         <div className="catalog-cta-copy">
-          <h2>— Получите каталог<br />натяжных Сигма-стен<br /><strong>для вашего интерьера</strong></h2>
+          <h2>— Получите каталог<br />натяжных стен<br /><strong>для вашего интерьера</strong></h2>
           <p>Посмотрите оттенки, фактуры и готовые комнаты — и решите, какие стены хотите увидеть у себя. Каталог бесплатный, без обязательств.</p>
-          <a className="primary section-cta catalog-cta-button" href="#contact">Получить каталог бесплатно <NextArrow /></a>
+          <a className="primary section-cta catalog-cta-button" href={PHONE_TEL}>Получить каталог бесплатно <NextArrow /></a>
         </div>
       </div>
     </section>
@@ -309,9 +309,9 @@ export default function LandingSections() {
             </button>
           </div>
           <div className="install-copy">
-            <h3>Монтаж за 1 день — чисто и тихо</h3>
-            <p>Всё собирается по понятной схеме: без пыли, грязи и долгой подготовки стен. Профиль задаёт плоскость, мембрана поглощает шум, ткань закрывает конструкцию — и комната готова к заселению.</p>
-            <a className="primary section-cta install-cta" href="#contact">Рассчитать стоимость стен <NextArrow /></a>
+            <h3>Как всё собирается по понятной схеме</h3>
+            <p>Всё собирается по понятной схеме: легко, быстро и без долгой подготовки стен. Ошибиться сложно — с системой разберётся даже тот, кто видит натяжные стены впервые.</p>
+            <a className="primary section-cta install-cta" href={PHONE_TEL}>Рассчитать стоимость стен <NextArrow /></a>
           </div>
         </div>
       </div>
@@ -319,19 +319,18 @@ export default function LandingSections() {
         <button className="close" type="button" aria-label="Закрыть видео" onClick={() => installVideo.current?.close()}>×</button>
         <h2 id="install-video-title">Как установить натяжные стены</h2>
         <div className="video-placeholder"><span>▷</span><p>Полный ролик монтажа скоро появится</p></div>
-        <p>Профиль задаёт плоскость, полотно заправляется в профиль. Последовательность простая — её как раз показывает эта инструкция.</p>
-        <a className="header-cta" href="#contact" onClick={() => installVideo.current?.close()}>Рассчитать стоимость стен</a>
+        <p>Каркас задаёт плоскость, полотно заправляется в профиль. Последовательность простая — её как раз показывает эта инструкция.</p>
+        <a className="header-cta" href={PHONE_TEL} onClick={() => installVideo.current?.close()}>Рассчитать стоимость стен</a>
       </dialog>
     </section>
 
     <section className="section compare-section" id="compare">
       <div className="wrap">
         <div className="section-heading-row">
-          <h2>Натяжные Сигма-стены<br /><strong>в 10 раз быстрее.</strong></h2>
+          <h2>Натяжные <span className="nowrap">Сигма-стены</span><br /><strong>в 10 раз быстрее.</strong></h2>
           <p>Натяжная стена по стоимости сопоставима с отделкой стены под покраску.</p>
         </div>
         <CompareTable />
-        <p className="compare-note">Расчёт приведён для одного и того же объёма работ по стенам. Точная смета зависит от площади, состояния основания и выбранной ткани.</p>
         <a className="primary section-cta compare-cta" href="#contact">Рассчитать стоимость моих стен <NextArrow /></a>
       </div>
     </section>
