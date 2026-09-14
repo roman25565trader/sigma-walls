@@ -1,9 +1,9 @@
-export const PHONE_DISPLAY = "+7 986 723 18 84";
-export const PHONE_TEL = "tel:+79867231884";
+export const PHONE_DISPLAY = "+7 (903) 467-80-30";
+export const PHONE_TEL = "tel:+79034678030";
 
 export const MAX_LINK = "https://max.ru/u/f9LHodD0cOIE6zqvluzWMPy0yuliP2rzH49oRr5WO_9vM9xJnnKV70x6BM4";
-export const TELEGRAM_LINK = "https://t.me/+79867231884";
-export const WHATSAPP_LINK = "https://wa.me/79867231884";
+export const TELEGRAM_LINK = "https://t.me/SiGma34Potolok";
+export const WHATSAPP_LINK = "https://wa.me/79034678030";
 
 export const messengers = [
   { key: "max", label: "MAX", href: MAX_LINK, title: "Написать в MAX" },

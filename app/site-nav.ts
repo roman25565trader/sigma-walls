@@ -7,7 +7,6 @@ export const siteNav = [
   { href: "#scenarios", label: "Для кого" },
   { href: "#material", label: "Материалы" },
   { href: "#everyday", label: "В жизни" },
-  { href: "#install", label: "Монтаж" },
   { href: "#compare", label: "Сравнение" },
   { href: "#faq", label: "Вопросы" },
   { href: "#contact", label: "Заявка" },

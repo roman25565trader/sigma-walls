@@ -88,20 +88,40 @@ function Questions() {
   );
 }
 
+function EverydayAnswer({ entry }: { entry: (typeof everyday)[number] }) {
+  return <>
+    <p>{entry.a}</p>
+    {entry.list && <ol className="everyday-list">{entry.list.map(line => <li key={line}>{line}</li>)}</ol>}
+  </>;
+}
+
 function EverydayStories() {
   const [active, setActive] = useState(0);
   const item = everyday[active];
-  return <div className="everyday-stage">
-    <div className="everyday-visual" id="everyday-visual">
-      {everyday.map((entry, i) => <div key={entry.q} className={`everyday-visual-frame${active === i ? " is-active" : ""}`}><Image src={entry.image} alt="" fill sizes="(max-width:700px) 100vw, 50vw"/></div>)}
+  function onTopicKeyDown(event: KeyboardEvent<HTMLButtonElement>, index: number) {
+    const next = event.key === "ArrowDown" || event.key === "ArrowRight" ? (index + 1) % everyday.length : event.key === "ArrowUp" || event.key === "ArrowLeft" ? (index + everyday.length - 1) % everyday.length : event.key === "Home" ? 0 : event.key === "End" ? everyday.length - 1 : null;
+    if (next === null) return;
+    event.preventDefault();
+    setActive(next);
+    document.getElementById(`everyday-tab-${next}`)?.focus();
+  }
+  return <div className="everyday-stage everyday-stage--text">
+    <div className="everyday-topics" role="tablist" aria-label="Вопросы о жизни со стенами" aria-orientation="vertical">
+      {everyday.map((entry, i) => {
+        const isActive = active === i;
+        return <div className={`everyday-topic${isActive ? " is-active" : ""}`} key={entry.q}>
+          <button type="button" role="tab" aria-selected={isActive} aria-controls="everyday-answer" id={`everyday-tab-${i}`} tabIndex={isActive ? 0 : -1} className={isActive ? "is-active" : ""} onClick={() => setActive(i)} onKeyDown={event => onTopicKeyDown(event, i)}>
+            <span className="everyday-topic-number">{String(i + 1).padStart(2, "0")}</span>
+            <span className="everyday-topic-text">{entry.q}</span>
+          </button>
+          {isActive && <div className="everyday-inline-answer"><EverydayAnswer entry={entry} /></div>}
+        </div>;
+      })}
     </div>
-    <div className="everyday-copy">
+    <div className="everyday-answer" id="everyday-answer" role="tabpanel" aria-labelledby={`everyday-tab-${active}`}>
+      <span className="everyday-answer-number">{String(active + 1).padStart(2, "0")}</span>
       <h3>{item.q}</h3>
-      <p>{item.a}</p>
-      {item.list && <ol className="everyday-list">{item.list.map(entry => <li key={entry}>{entry}</li>)}</ol>}
-      <div className="everyday-topics" role="tablist" aria-label="Вопросы о жизни со стенами">
-        {everyday.map((entry, i) => <button key={entry.q} type="button" role="tab" aria-selected={active === i} aria-controls="everyday-visual" id={`everyday-tab-${i}`} className={active === i ? "is-active" : ""} onClick={() => setActive(i)} onKeyDown={event => { const next = event.key === "ArrowDown" || event.key === "ArrowRight" ? (i + 1) % everyday.length : event.key === "ArrowUp" || event.key === "ArrowLeft" ? (i + everyday.length - 1) % everyday.length : event.key === "Home" ? 0 : event.key === "End" ? everyday.length - 1 : null; if (next === null) return; event.preventDefault(); setActive(next); document.getElementById(`everyday-tab-${next}`)?.focus(); }}>{entry.q}</button>)}
-      </div>
+      <EverydayAnswer entry={item} />
     </div>
   </div>;
 }
@@ -112,7 +132,7 @@ function CompareTable() {
       <table className="compare-table">
         <thead>
           <tr>
-            <th scope="col">Вид затрат</th>
+            <th scope="col">Критерий</th>
             {compareColumns.map((column, i) => <th scope="col" key={column} className={i === compareColumns.length - 1 ? "is-sigma" : undefined}>{column}</th>)}
           </tr>
         </thead>
@@ -142,7 +162,6 @@ function CompareTable() {
 }
 
 export default function LandingSections() {
-  const installVideo = useRef<HTMLDialogElement>(null);
   const [room, setRoom] = useState(0);
   const [fabric, setFabric] = useState(0);
   const [layer, setLayer] = useState(0);
@@ -210,7 +229,7 @@ export default function LandingSections() {
     </div></section>
 
     <section className="section scenarios-section" id="scenarios"><div className="wrap">
-      <h2>Натяжные <span className="nowrap">Сигма-стены</span> — <strong>это лучшее решение для вас.</strong></h2>
+      <h2>Натяжные <span className="nowrap">Сигма-стены</span> — <strong>это лучшее решение для вас</strong></h2>
       <div className="scenario-grid">{scenarios.map((item, i) => (
         <article className="scenario" key={item.title}>
           <div className="scenario-image"><Image src={item.image} alt={item.alt} fill sizes="(max-width:700px) 100vw, (max-width:1200px) 50vw, 25vw"/><span>0{i + 1}</span></div>
@@ -222,7 +241,7 @@ export default function LandingSections() {
 
     <section className="section wrap gallery-section" id="material">
       <div className="section-heading-row">
-        <h2>Выберите, как будут<br /><strong>выглядеть ваши стены.</strong></h2>
+        <h2>Выберите, как будут<br /><strong>выглядеть ваши стены</strong></h2>
         <p>Детская, спальня, гостиная или кабинет — ткань может остаться тихим фоном или стать главным акцентом комнаты. Листайте интерьеры и выбирайте настроение: цвет и фактуру подберём по реальным образцам.</p>
       </div>
       <div className="gallery-stage">
@@ -282,52 +301,22 @@ export default function LandingSections() {
 
     <section className="catalog-cta-section" id="catalog">
       <div className="catalog-cta-bg">
-        <Image className="catalog-cta-photo catalog-cta-photo--desktop" src="/images/real/samples-stack.webp" alt="" fill sizes="100vw"/>
-        <Image className="catalog-cta-photo catalog-cta-photo--mobile" src="/images/real/samples-touch.webp" alt="" fill sizes="100vw"/>
+        <Image className="catalog-cta-photo catalog-cta-photo--desktop" src="/images/cta.png" alt="" fill sizes="100vw"/>
+        <Image className="catalog-cta-photo catalog-cta-photo--mobile" src="/images/cta-mobile.png" alt="" fill sizes="100vw"/>
       </div>
       <div className="wrap">
         <div className="catalog-cta-copy">
-          <h2>— Получите каталог<br />натяжных стен<br /><strong>для вашего интерьера</strong></h2>
+          <h2>Получите каталог<br />натяжных стен<br /><strong>для вашего интерьера</strong></h2>
           <p>Посмотрите оттенки, фактуры и готовые комнаты — и решите, какие стены хотите увидеть у себя. Каталог бесплатный, без обязательств.</p>
           <a className="primary section-cta catalog-cta-button" href={PHONE_TEL}>Получить каталог бесплатно <NextArrow /></a>
         </div>
       </div>
     </section>
 
-    <section className="section install-section" id="install">
-      <div className="wrap">
-        <div className="section-heading-row">
-          <h2>Как установить<br /><strong>натяжные стены.</strong></h2>
-          <p>Рассказываем, как установить готовые стены за 1 день.</p>
-        </div>
-        <div className="install-layout">
-          <div className="install-visual">
-            <Image src="/images/tutorial-preview.png" alt="Монтаж натяжной стены: полотно заправляют в профиль" width={1672} height={941} sizes="(max-width:700px) 100vw, 68vw" style={{width:"100%",height:"auto"}}/>
-            <button type="button" className="video-orbit" aria-label="Смотреть инструкцию, как установить натяжные стены" onClick={() => installVideo.current?.showModal()}>
-              <svg className="orbit-text" viewBox="0 0 180 180" aria-hidden="true"><defs><path id="install-text-circle" d="M90,90 m-62,0 a62,62 0 1,1 124,0 a62,62 0 1,1 -124,0"/></defs><text><textPath href="#install-text-circle" textLength="382" lengthAdjust="spacing">ИНСТРУКЦИЯ, КАК ЭТО УСТАНОВИТЬ · SIGMA · </textPath></text></svg>
-              <span className="orbit-play"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m9 5 11 7-11 7Z" fill="currentColor"/></svg></span>
-            </button>
-          </div>
-          <div className="install-copy">
-            <h3>Как всё собирается по понятной схеме</h3>
-            <p>Всё собирается по понятной схеме: легко, быстро и без долгой подготовки стен. Ошибиться сложно — с системой разберётся даже тот, кто видит натяжные стены впервые.</p>
-            <a className="primary section-cta install-cta" href={PHONE_TEL}>Рассчитать стоимость стен <NextArrow /></a>
-          </div>
-        </div>
-      </div>
-      <dialog className="video-dialog" ref={installVideo} aria-labelledby="install-video-title" onClick={event => { if (event.target === event.currentTarget) installVideo.current?.close(); }}>
-        <button className="close" type="button" aria-label="Закрыть видео" onClick={() => installVideo.current?.close()}>×</button>
-        <h2 id="install-video-title">Как установить натяжные стены</h2>
-        <div className="video-placeholder"><span>▷</span><p>Полный ролик монтажа скоро появится</p></div>
-        <p>Каркас задаёт плоскость, полотно заправляется в профиль. Последовательность простая — её как раз показывает эта инструкция.</p>
-        <a className="header-cta" href={PHONE_TEL} onClick={() => installVideo.current?.close()}>Рассчитать стоимость стен</a>
-      </dialog>
-    </section>
-
     <section className="section compare-section" id="compare">
       <div className="wrap">
         <div className="section-heading-row">
-          <h2>Натяжные <span className="nowrap">Сигма-стены</span><br /><strong>в 10 раз быстрее.</strong></h2>
+          <h2>Натяжные <span className="nowrap">Сигма-стены</span><br /><strong>в 10 раз быстрее</strong></h2>
           <p>Натяжная стена по стоимости сопоставима с отделкой стены под покраску.</p>
         </div>
         <CompareTable />
@@ -338,7 +327,7 @@ export default function LandingSections() {
     <section className="section faq-section" id="faq">
       <div className="wrap">
         <div className="faq-heading">
-          <h2>Что ещё важно знать<br /><strong>перед установкой.</strong></h2>
+          <h2>Что ещё важно знать<br /><strong>перед установкой</strong></h2>
           <p>Каждый интерьер индивидуален. Если вопроса нет в списке — задайте его по телефону.</p>
         </div>
         <Questions />
@@ -351,7 +340,7 @@ export default function LandingSections() {
       </div>
       <div className="wrap lead-layout">
         <div className="lead-copy">
-          <h2>Оставьте заявку<br />и получите расчёт<br /><strong>стоимости ваших стен.</strong></h2>
+          <h2>Оставьте заявку<br />и получите расчёт<br /><strong>стоимости ваших стен</strong></h2>
           <LeadForm />
         </div>
         <div className="lead-founder">
