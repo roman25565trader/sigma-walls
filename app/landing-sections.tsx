@@ -88,40 +88,20 @@ function Questions() {
   );
 }
 
-function EverydayAnswer({ entry }: { entry: (typeof everyday)[number] }) {
-  return <>
-    <p>{entry.a}</p>
-    {entry.list && <ol className="everyday-list">{entry.list.map(line => <li key={line}>{line}</li>)}</ol>}
-  </>;
-}
-
 function EverydayStories() {
   const [active, setActive] = useState(0);
   const item = everyday[active];
-  function onTopicKeyDown(event: KeyboardEvent<HTMLButtonElement>, index: number) {
-    const next = event.key === "ArrowDown" || event.key === "ArrowRight" ? (index + 1) % everyday.length : event.key === "ArrowUp" || event.key === "ArrowLeft" ? (index + everyday.length - 1) % everyday.length : event.key === "Home" ? 0 : event.key === "End" ? everyday.length - 1 : null;
-    if (next === null) return;
-    event.preventDefault();
-    setActive(next);
-    document.getElementById(`everyday-tab-${next}`)?.focus();
-  }
-  return <div className="everyday-stage everyday-stage--text">
-    <div className="everyday-topics" role="tablist" aria-label="Вопросы о жизни со стенами" aria-orientation="vertical">
-      {everyday.map((entry, i) => {
-        const isActive = active === i;
-        return <div className={`everyday-topic${isActive ? " is-active" : ""}`} key={entry.q}>
-          <button type="button" role="tab" aria-selected={isActive} aria-controls="everyday-answer" id={`everyday-tab-${i}`} tabIndex={isActive ? 0 : -1} className={isActive ? "is-active" : ""} onClick={() => setActive(i)} onKeyDown={event => onTopicKeyDown(event, i)}>
-            <span className="everyday-topic-number">{String(i + 1).padStart(2, "0")}</span>
-            <span className="everyday-topic-text">{entry.q}</span>
-          </button>
-          {isActive && <div className="everyday-inline-answer"><EverydayAnswer entry={entry} /></div>}
-        </div>;
-      })}
+  return <div className="everyday-stage">
+    <div className="everyday-visual" id="everyday-visual">
+      {everyday.map((entry, i) => <div key={entry.q} className={`everyday-visual-frame${active === i ? " is-active" : ""}`}><Image src={entry.image} alt="" fill sizes="(max-width:700px) 100vw, 50vw" style={entry.position ? { objectPosition: entry.position } : undefined}/></div>)}
     </div>
-    <div className="everyday-answer" id="everyday-answer" role="tabpanel" aria-labelledby={`everyday-tab-${active}`}>
-      <span className="everyday-answer-number">{String(active + 1).padStart(2, "0")}</span>
+    <div className="everyday-copy">
       <h3>{item.q}</h3>
-      <EverydayAnswer entry={item} />
+      <p>{item.a}</p>
+      {item.list && <ol className="everyday-list">{item.list.map(entry => <li key={entry}>{entry}</li>)}</ol>}
+      <div className="everyday-topics" role="tablist" aria-label="Вопросы о жизни со стенами">
+        {everyday.map((entry, i) => <button key={entry.q} type="button" role="tab" aria-selected={active === i} aria-controls="everyday-visual" id={`everyday-tab-${i}`} className={active === i ? "is-active" : ""} onClick={() => setActive(i)} onKeyDown={event => { const next = event.key === "ArrowDown" || event.key === "ArrowRight" ? (i + 1) % everyday.length : event.key === "ArrowUp" || event.key === "ArrowLeft" ? (i + everyday.length - 1) % everyday.length : event.key === "Home" ? 0 : event.key === "End" ? everyday.length - 1 : null; if (next === null) return; event.preventDefault(); setActive(next); document.getElementById(`everyday-tab-${next}`)?.focus(); }}>{entry.q}</button>)}
+      </div>
     </div>
   </div>;
 }

@@ -759,40 +759,6 @@ h2 .nowrap,.landing-sections h2 .nowrap{color:inherit}
 .compare-table tr.is-accent td.is-sigma{font-size:16px}
 }
 
-.everyday-stage--text{grid-template-columns:minmax(0,1fr) minmax(0,1.05fr);gap:0 64px;align-items:start}
-.everyday-stage--text .everyday-topics{margin-top:0;counter-reset:none}
-.everyday-topic{border-bottom:1px solid #45484b1a}
-.everyday-stage--text .everyday-topics>.everyday-topic>button{display:grid;grid-template-columns:36px minmax(0,1fr);align-items:baseline;gap:12px;width:100%;padding:17px 16px 17px 18px;border:0;border-left:2px solid transparent;border-radius:0;background:transparent;color:#5e6367;text-align:left;font-size:16px;font-weight:500;line-height:1.45;transform:none}
-.everyday-stage--text .everyday-topic>button:hover{background:#f5f6f7;color:#101215;transform:none}
-.everyday-stage--text .everyday-topic>button.is-active{border-left-color:#ff1d33;background:#ffffff;color:#101215}
-.everyday-stage--text .everyday-topic>button:focus-visible{outline:2px solid #ff1d33;outline-offset:-2px}
-.everyday-topic-number{font-size:12px;font-weight:600;letter-spacing:.5px;color:#9aa0a6}
-.everyday-topic>button.is-active .everyday-topic-number{color:#ff1d33}
-.everyday-inline-answer{display:none}
-.everyday-answer{position:sticky;top:120px;padding:44px 48px 48px;border-radius:24px;background:#ffffff;box-shadow:0 24px 60px #52596014;min-height:360px}
-.everyday-answer-number{display:block;margin-bottom:22px;font-size:56px;font-weight:700;line-height:1;letter-spacing:-2px;color:#ff1d33}
-.everyday-answer h3{margin:0 0 18px;font-size:clamp(24px,2vw,32px);font-weight:600;line-height:1.28;letter-spacing:-.6px;color:#101215}
-.everyday-answer>p{margin:0;font-size:17px;line-height:1.8;color:#4e5357}
-.everyday-answer .everyday-list{margin-top:16px;font-size:16px;color:#4e5357}
-@media(max-width:1100px){
-.everyday-stage--text{gap:0 32px}
-.everyday-answer{padding:34px 32px 36px;min-height:300px}
-.everyday-answer-number{font-size:44px}
-}
-@media(max-width:900px){
-.everyday-stage--text{grid-template-columns:1fr}
-.everyday-answer{display:none}
-.everyday-inline-answer{display:block;padding:2px 18px 22px 68px;background:#ffffff;border-left:2px solid #ff1d33}
-.everyday-inline-answer>p{margin:0;font-size:15px;line-height:1.75;color:#4e5357}
-.everyday-inline-answer .everyday-list{margin-top:12px;font-size:14px;color:#4e5357}
-.everyday-stage--text .everyday-topics{border-top:1px solid #45484b1a}
-}
-@media(max-width:700px){
-.everyday-stage--text .everyday-topics>.everyday-topic>button{grid-template-columns:28px minmax(0,1fr);gap:10px;padding:15px 12px 15px 14px;font-size:15px}
-.everyday-inline-answer{padding:0 14px 18px 54px}
-.everyday-inline-answer>p{font-size:14px}
-}
-
 @media(min-width:1101px){
 .lead-section{height:auto;max-height:none;min-height:0;overflow:hidden}
 .lead-layout{height:auto;min-height:0;align-items:end;column-gap:40px;padding-top:clamp(104px,11vh,140px)}
