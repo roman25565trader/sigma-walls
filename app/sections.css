@@ -766,3 +766,5 @@ h2 .nowrap,.landing-sections h2 .nowrap{color:inherit}
 .lead-founder{align-self:end;width:100%;height:clamp(500px,calc(100svh - 140px),860px)}
 .lead-founder img{transform:none!important;object-fit:contain!important;object-position:center bottom!important}
 }
+.compare-lead{margin:0 0 18px;font-size:17px;font-weight:600;color:#101215}
+@media(max-width:700px){.compare-lead{font-size:15px;margin-bottom:14px}}

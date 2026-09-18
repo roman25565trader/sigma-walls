@@ -180,7 +180,7 @@ export default function LandingSections() {
     <section className="section wrap technology-section" id="technology">
       <div className="technology-heading">
         <h2>Что такое <strong>Натяжные <span className="nowrap">Сигма-стены?</span></strong></h2>
-        <p>Три шага от существующего основания до идеально ровной стены.</p>
+        <p>Четыре шага от существующего основания до идеально ровной стены.</p>
       </div>
       <div className="layer-tabs" role="tablist" aria-label="Слои натяжной стены">
         {wallLayers.map((item, i) => <button key={item.tab} type="button" role="tab" id={`layer-tab-${i}`} aria-controls="layer-panel" aria-selected={layer === i} tabIndex={layer === i ? 0 : -1} onClick={() => selectLayer(i)} onKeyDown={e => { const next = e.key === "ArrowRight" ? (i + 1) % wallLayers.length : e.key === "ArrowLeft" ? (i + wallLayers.length - 1) % wallLayers.length : e.key === "Home" ? 0 : e.key === "End" ? wallLayers.length - 1 : null; if (next !== null) { e.preventDefault(); selectLayer(next); document.getElementById(`layer-tab-${next}`)?.focus(); } }}><Image className="layer-tab-image" src={item.image} alt="" width={72} height={72} /><span className="layer-tab-copy"><small>0{i + 1}</small><strong>{item.tab}</strong><em>{item.tabDetail}</em></span></button>)}
@@ -299,6 +299,7 @@ export default function LandingSections() {
           <h2>Натяжные <span className="nowrap">Сигма-стены</span><br /><strong>в 10 раз быстрее</strong></h2>
           <p>Натяжная стена по стоимости сопоставима с отделкой стены под покраску.</p>
         </div>
+        <p className="compare-lead">Пример расчёта стоимости ремонта стен в комнате 20 м²</p>
         <CompareTable />
         <a className="primary section-cta compare-cta" href="#contact">Рассчитать стоимость моих стен <NextArrow /></a>
       </div>
