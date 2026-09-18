@@ -2,6 +2,7 @@
 
 import Image from "next/image";
 import { useEffect, useRef, useState, type FormEvent, type KeyboardEvent } from "react";
+import { preconnect } from "react-dom";
 import { BITRIX_FORM, PHONE_DISPLAY, PHONE_TEL } from "./contacts";
 import { compareColumns, compareRows, everyday, faq, rooms, scenarios, values, wallLayers } from "./site-data";
 
@@ -9,17 +10,35 @@ function NextArrow() { return <span aria-hidden="true">↗</span>; }
 
 function BitrixForm() {
   const host = useRef<HTMLDivElement>(null);
+  const [ready, setReady] = useState(false);
+  preconnect(new URL(BITRIX_FORM.scriptSrc).origin);
   useEffect(() => {
-    if (!BITRIX_FORM.scriptSrc || !host.current) return;
+    const node = host.current;
+    if (!BITRIX_FORM.scriptSrc || !node) return;
+    // CRM-сервер отвечает небыстро: пока форма не отрисовалась, показываем заглушку с телефоном.
+    const observer = new MutationObserver(() => {
+      if (node.querySelector(".b24-form input")) { setReady(true); observer.disconnect(); }
+    });
+    observer.observe(node, { childList: true, subtree: true });
     const script = document.createElement("script");
     script.src = `${BITRIX_FORM.scriptSrc}?${Math.floor(Date.now() / 180000)}`;
     script.async = true;
     script.dataset.b24Form = BITRIX_FORM.containerId;
     script.dataset.skipMoving = "true";
-    host.current.appendChild(script);
-    return () => { script.remove(); };
+    node.appendChild(script);
+    return () => { observer.disconnect(); script.remove(); };
   }, []);
-  return <div className="lead-bitrix" ref={host} />;
+  return (
+    <>
+      {!ready && (
+        <div className="lead-form lead-bitrix-loading" aria-live="polite">
+          <a className="primary section-cta lead-form-button" href={PHONE_TEL}>{PHONE_DISPLAY} <NextArrow /></a>
+          <small>Загружаем форму заявки… Можно не ждать — позвоните, обсудим расчёт.</small>
+        </div>
+      )}
+      <div className="lead-bitrix" ref={host} />
+    </>
+  );
 }
 
 function LeadForm() {
