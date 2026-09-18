@@ -12,7 +12,7 @@ function BitrixForm() {
   useEffect(() => {
     if (!BITRIX_FORM.scriptSrc || !host.current) return;
     const script = document.createElement("script");
-    script.src = BITRIX_FORM.scriptSrc;
+    script.src = `${BITRIX_FORM.scriptSrc}?${Math.floor(Date.now() / 180000)}`;
     script.async = true;
     script.dataset.b24Form = BITRIX_FORM.containerId;
     script.dataset.skipMoving = "true";

@@ -12,8 +12,8 @@ export const messengers = [
 ] as const;
 
 export const BITRIX_FORM = {
-  scriptSrc: "",
-  containerId: "",
+  scriptSrc: "https://crm.sigma34.ru/upload/crm/form/loader_13_swocms.js",
+  containerId: "inline/13/swocms",
 } as const;
 
 export const operator = {
